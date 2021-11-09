@@ -365,32 +365,34 @@ class CustomerLogoutView(View):
 
 
 class CustomerLoginView(FormView):
-	template_name = "customerlogin.html"
-	form_class = CustomerLoginForm
-	success_url = reverse_lazy("grocery:home1")
+    template_name = "customerlogin.html"
+    form_class = CustomerLoginForm
+    success_url = reverse_lazy("grocery:home1")
 
 	# form_valid method is a type of post method and is available in createview formview and updateview
-	def form_valid(self, form):
-		uname = form.cleaned_data.get("username")
-		pword = form.cleaned_data["password"]
-		usr = authenticate(username=uname, password=pword)
-		if usr is not None :
-			login(self.request, usr)
-			context={'userid':usr.id}
-			return render(self.request, 'home1.html', context)
-			
 
-		else:
-			return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid credentials"})
+    def form_valid(self, form):
+        uname = form.cleaned_data.get("username")
+        pword = form.cleaned_data.get("password")
+        print("username=",uname,"password=",pword)
+        usr = authenticate(username=uname, password=pword)
+        if usr is not None :
+            login(self.request, usr)
+            context={'userid':usr.id}
+            return render(self.request, 'home1.html', context)
+            
 
-		return super().form_valid(form)
+        else:
+            return render(self.request, self.template_name, {"form": self.form_class, "error": "Invalid credentials"})
 
-	def get_success_url(self):
-		if "next" in self.request.GET:
-			next_url = self.request.GET.get("next")
-			return next_url
-		else:
-			return self.success_url
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        if "next" in self.request.GET:
+            next_url = self.request.GET.get("next")
+            return next_url
+        else:
+            return self.success_url
 
 
 class AboutView( TemplateView):

@@ -23,7 +23,7 @@ body {
   color: white;
   line-height: 70px;
   text-align: center;
-  background: #063146;
+  background: #292a2b;
   user-select: none;
 }
 .sidebar ul a{
@@ -50,7 +50,7 @@ ul li:hover a{
 }
 label #btn,label #cancel{
   position: absolute;
-  background: #042331;
+  background: #2f373a;
   border-radius: 3px;
   cursor: pointer;
 }
@@ -67,7 +67,7 @@ label #cancel{
   left: -195px;
   top: 17px;
   font-size: 30px;
-  color: #0a5275;
+  color: #2b2f31;
   padding: 4px 9px;
   transition: all .5s ease;
 }
